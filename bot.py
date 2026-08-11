@@ -1,8 +1,7 @@
 import sqlite3, logging
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import ApplicationBuilder, CallbackQueryHandler, MessageHandler, filters, ConversationHandler
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram.ext import ApplicationBuilder, CallbackQueryHandler, MessageHandler, filters, ConversationHandler, CommandHandler, ContextTypes
 
-# Твои данные внутри кода — никакой магии с переменными
 TOKEN = "8733876154:AAFOPwTsf1RwnCnM6CQ6eDjSEtGHmsvhHLA"
 ADMIN_ID = 5006344380
 
@@ -21,7 +20,7 @@ async def start(update, context):
         await update.message.reply_text("👋 Админ, используй /add [время] для слотов.")
     else:
         kb = [[InlineKeyboardButton("📅 Записаться", callback_data="show_slots")]]
-        await update.message.reply_text("✨ Добро пожаловать в детейлинг!", reply_markup=InlineKeyboardMarkup(kb))
+        await update.message.reply_text("✨ Добро пожаловать!", reply_markup=InlineKeyboardMarkup(kb))
 
 async def add_slot(update, context):
     if update.effective_user.id != ADMIN_ID: return
